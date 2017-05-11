@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { ParkingLots } from '../api/parking_lots.js';
- 
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 import ParkingLot from './ParkingLot.jsx';
  
 // App component - represents the whole app
@@ -22,10 +23,7 @@ class App extends Component {
     // Find the text field via the React ref
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
  
-    ParkingLots.insert({
-      text,
-      createdAt: new Date(), // current time
-    });
+    Meteor.call('parkingLots.insert', text);
  
     // Clear form
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
@@ -42,9 +40,18 @@ class App extends Component {
     if (this.state.hideCompleted) {
       filteredParkingLots = filteredParkingLots.filter(parkingLot => !parkingLot.checked);
     }
-    return filteredParkingLots.map((parkingLot) => (
-      <ParkingLot key={parkingLot._id} parkingLot={parkingLot} />
-    ));
+    return filteredParkingLots.map((parkingLot) => {
+      const currentUserId = this.props.currentUser && this.props.currentUser._id;
+      const showPrivateButton = parkingLot.owner === currentUserId;
+ 
+      return (
+        <ParkingLot
+          key={parkingLot._id}
+          parkingLot={parkingLot}
+          showPrivateButton={showPrivateButton}
+        />
+      );
+    });
   }
 
  
@@ -62,6 +69,9 @@ class App extends Component {
             />
             Hide Completed ParkingLots
           </label>
+          
+          <AccountsUIWrapper />
+          { this.props.currentUser ?
 
             <form className="new-parking-lot" onSubmit={this.handleSubmit.bind(this)} >
               <input
@@ -69,7 +79,8 @@ class App extends Component {
                 ref="textInput"
                 placeholder="Type to add new parking lot"
               />
-            </form>
+            </form> : ''
+          } 
         </header>
  
         <ul>
@@ -82,11 +93,15 @@ class App extends Component {
 
 App.propTypes = {
   parkingLots: PropTypes.array.isRequired,
+  incompleteCount: PropTypes.number.isRequired,
+  currentUser: PropTypes.object,
 };
  
 export default createContainer(() => {
+  Meteor.subscribe('parkingLots');
   return {
     parkingLots: ParkingLots.find({}, { sort: { createdAt: 1 } }).fetch(),
     incompleteCount: ParkingLots.find({ checked: { $ne: true } }).count(),
+    currentUser: Meteor.user(),
   };
 }, App);
