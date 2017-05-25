@@ -17,13 +17,24 @@ header {
 #login-buttons {
   display: block;
 }
+
+.login-button {
+  background: #337ab7 !important;
+}
+
+#login-name-link {
+  color: #23527c;
+}
+
+#login-name-link:hover {
+  color: #337ab7;
+}
  
 h1 {
   font-size: 2.5em;
   margin: 0;
   margin-bottom: 10px;
   display: inline-block;
-  margin-right: 1em;
 }
  
 form {
@@ -86,7 +97,7 @@ li.private {
 }
  
 header .hide-completed {
-  float: right;
+
 }
  
 .toggle-private {
@@ -110,12 +121,15 @@ header .hide-completed {
 }
 
 @media (max-width: 330px) {
+  li.tab-link {
+    padding: 5px;
+  }
   .popup-content {
-    min-width: 225px;
+    min-width: 205px;
   }
 
   iframe {
-    width: 240px;
+    width: 220px;
   }
 }
 

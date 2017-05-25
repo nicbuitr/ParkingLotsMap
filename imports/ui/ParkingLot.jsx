@@ -1,43 +1,33 @@
 import React, { Component, PropTypes } from 'react';
-import { Meteor } from 'meteor/meteor';
-import { ParkingLots } from '../api/parking_lots.js';
-import classnames from 'classnames';
  
 // ParkingLot component - represents a single todo item
 export default class ParkingLot extends Component {
-  constructor(props) {
-    super(props); 
-    this.test = this.test.bind(this);
-  }
+    constructor(props) {
+        super(props);
+    }
   
 
-  openTab(evt, tabName) {
-      evt.preventDefault();
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-  }
+    openTab(evt, tabName) {
+        evt.preventDefault();
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName('tabcontent');
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = 'none';
+        }
+        tablinks = document.getElementsByClassName('tablinks');
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(' active', '');
+        }
+        document.getElementById(tabName).style.display = 'block';
+        evt.currentTarget.className += ' active';
+    }
 
-  test() {
-    alert("Yes");
-    console.log("Yes");
-  }
-
-
-  render() {
-    let feature = this.props.feature;
-    let featureProps = feature.properties;
-    let ret;
-    if (feature.properties && feature.properties.name) {
-      ret = (
+    render() {
+        let feature = this.props.feature;
+        let featureProps = feature.properties;
+        let ret;
+        if (feature.properties && feature.properties.name) {
+            ret = (
         <div key={'popup_info_'+feature._id} className="popup-info">
           <div key={'initial_div_'+feature._id} id={'initial_div_'+feature._id} className="tab">
             <div className="content">
@@ -54,7 +44,7 @@ export default class ParkingLot extends Component {
                <hr/>
                 <div className="popup-iframe">
                     <iframe key={'sviframe_'+feature._id} width="275" height="200" frameBorder="0" style={{border:0}} 
-                    src={"https://www.google.com/maps/embed/v1/streetview?key=AIzaSyB2z6ukJIFTaOKN_cIsPKtDCQB_EkMQBuU&location="+feature.geometry.coordinates[1]+", "+feature.geometry.coordinates[0]+"&heading="+(feature.geometry.heading?feature.geometry.heading:0)+"&pitch="+(feature.geometry.pitch?feature.geometry.pitch:0)+"&fov="+(feature.geometry.fov?feature.geometry.fov:100)}
+                    src={'https://www.google.com/maps/embed/v1/streetview?key=AIzaSyB2z6ukJIFTaOKN_cIsPKtDCQB_EkMQBuU&location='+feature.geometry.coordinates[1]+', '+feature.geometry.coordinates[0]+'&heading='+(feature.geometry.heading?feature.geometry.heading:0)+'&pitch='+(feature.geometry.pitch?feature.geometry.pitch:0)+'&fov='+(feature.geometry.fov?feature.geometry.fov:100)}
                      allowFullScreen=""></iframe>
                  </div>
              </div>
@@ -134,10 +124,10 @@ export default class ParkingLot extends Component {
                </div>
            </div>
        </div>
-        )
-    }
-    else{
-      ret = (
+        );
+        }
+        else{
+            ret = (
        <div key={'popup_info_'+feature._id} className="popup-info">
           <div key={'sviframe_div_'+feature._id} id={'street_view_lot_'+feature._id} className="tab">
             <div className="content">
@@ -147,19 +137,19 @@ export default class ParkingLot extends Component {
                <hr/>
                 <div className="popup-iframe">
                     <iframe key={'sviframe_'+feature._id} width="275" height="200" frameBorder="0" style={{border:0}} 
-                    src={"https://www.google.com/maps/embed/v1/streetview?key=AIzaSyB2z6ukJIFTaOKN_cIsPKtDCQB_EkMQBuU&location="+feature.geometry.coordinates[1]+", "+feature.geometry.coordinates[0]+"&heading="+(feature.geometry.heading?feature.geometry.heading:0)+"&pitch="+(feature.geometry.pitch?feature.geometry.pitch:0)+"&fov="+(feature.geometry.fov?feature.geometry.fov:100)}
+                    src={'https://www.google.com/maps/embed/v1/streetview?key=AIzaSyB2z6ukJIFTaOKN_cIsPKtDCQB_EkMQBuU&location='+feature.geometry.coordinates[1]+', '+feature.geometry.coordinates[0]+'&heading='+(feature.geometry.heading?feature.geometry.heading:0)+'&pitch='+(feature.geometry.pitch?feature.geometry.pitch:0)+'&fov='+(feature.geometry.fov?feature.geometry.fov:100)}
                      allowFullScreen=""></iframe>
                  </div>
              </div>
            </div>
        </div>
-        )
-    }
-    return (
+        );
+        }
+        return (
       <span>
         <div className="tabs">
            <ul className="tabs-link">
-              <a href={'#street_view_lot_'+feature._id}><li className="tab-link left-edge">Street View</li></a>
+              <a href={'#street_view_lot_'+feature._id}><li className="tab-link left-edge">StreetView</li></a>
               <a href={'#info_lot_'+feature._id}><li className="tab-link">Info</li></a>
               <a href={'#rates_lot_'+feature._id}><li className="tab-link">Rates</li></a>
               <a href={'#amenities_lot_'+feature._id}><li className="tab-link right-edge">Amenities</li></a>
@@ -169,8 +159,8 @@ export default class ParkingLot extends Component {
           {ret}
       </div>
     </span>
-    );
-  }
+        );
+    }
 }
  
 ParkingLot.propTypes = {
