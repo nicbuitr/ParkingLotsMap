@@ -81,7 +81,7 @@ class App extends Component {
           });
 
             map.addControl( new L.Control.Search({
-                url: 'http://nominatim.openstreetmap.org/search?format=json&q={s}',
+                url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
                 jsonpParam: 'json_callback',
                 propertyName: 'display_name',
                 propertyLoc: ['lat','lon'],
