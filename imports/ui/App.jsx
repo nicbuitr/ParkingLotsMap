@@ -13,10 +13,10 @@
 4) Adecuar formulario para añadir nueva entrada con geoLocation
 5) Organizar info del Popup
 6) Encapsular en componentes de React
-Check.
 7) Organizar banner para que permita ser ocultado
 8) Hacer Logo
 9) Revisar el cumplimiento de los criterios requeridos para el proyecto 3 y 4
+<-- Check Hasta Acá. -->
 10) Implementar login con API de Facebook
 11) Agregar más parqueaderos.
 12) Responsiveness*/
@@ -151,19 +151,18 @@ class App extends Component {
         this.state.map = map;
     }
 
- 
     render() {
         return (
             <div className="container">
-              <header>        
+              <header id="header" className="collapse in">        
                 <AccountsUIWrapper />
                 <div className="col-md-12 text-center">
-                    <h1>Parking Lots ({this.props.incompleteCount})</h1>
-                    <p>Need a place to park? Find the lot that suits you most on this map!</p>
+                    <img src="/img/logo.png" className="inline-img-responsive" alt="Parking Lots Map Logo"/>
+                    <h4>Need a place to park? Find on this map the lot that fits you most!</h4>
                 </div>
                 { this.props.currentUser && this.props.currentUser._id == 'yCAY4Ae2ykQqJqqxj' ?
                   <div className="col-md-12 text-center">
-                      <button type="button" className="btn-primary btn-lg" onClick={this.handleSubmit.bind(this)}>Add Current Location</button>
+                      <button aria-label="Add current location button" type="button" className="btn-primary btn-lg" onClick={this.handleSubmit.bind(this)}>Add Current Location</button>
                   </div> : ''
                 }            
                 {/**TODO Generar de forma dinámica los checkbox para filtrar */}  
@@ -174,8 +173,11 @@ class App extends Component {
                   Hide Completed ParkingLots
                 </label>
                 </div>
+
               </header>
-       
+                <button aria-label="Toggle show or hide header" type="button" className="banner-chevron btn-primary btn-lg leaflet-control" data-toggle="collapse" data-target="#header">
+                    <span></span>
+                </button>
               <div id="progress"><div id="progress-bar"></div></div>
               <div id='map'></div>
               {this.state.map?this.componentDidMount():''}

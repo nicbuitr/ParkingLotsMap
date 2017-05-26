@@ -8,10 +8,30 @@ header {
   background: rgb(195, 218, 237);
   padding: 20px 15px 15px 15px;
   position: relative;
+  border-bottom: #337ab7 solid 1px;
+}
+
+.inline-img-responsive {
+  display: inline;
+  max-width: 100%;
 }
 
 .footer {
   padding: 1em;
+}
+
+/* Icon when the collapsible content is shown */
+.banner-chevron:after {
+  font-family: "Glyphicons Halflings";
+  content: "\e113";
+}
+/* Icon when the collapsible content is hidden */
+.banner-chevron.collapsed:after {
+  content: "\e114";
+}
+
+.banner-chevron{
+  width: 100%;
 }
  
 #login-buttons {
