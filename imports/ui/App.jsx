@@ -16,10 +16,11 @@
 7) Organizar banner para que permita ser ocultado
 8) Hacer Logo
 9) Revisar el cumplimiento de los criterios requeridos para el proyecto 3 y 4
+10) Agregar más parqueaderos.
+11) Responsiveness*
+12) Vídeo
 <-- Check Hasta Acá. -->
-10) Implementar login con API de Facebook
-11) Agregar más parqueaderos.
-12) Responsiveness*/
+/
 
 /* global L*/
 import React, { Component, PropTypes } from 'react';
@@ -76,9 +77,9 @@ class App extends Component {
 
             L.control.locate({enableHighAccuracy: true}).addTo(map);
             map.on('locationfound',
-          (e) => {
-              this.state.latlng = e.latlng;
-          });
+            (e) => {
+                this.state.latlng = e.latlng;
+            });
 
             map.addControl( new L.Control.Search({
                 url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
@@ -88,6 +89,7 @@ class App extends Component {
                 marker: L.circleMarker([0,0],{radius:30}),
                 autoCollapse: true,
                 autoType: false,
+                zoom: 18,
                 minLength: 2
             }) );
         }
