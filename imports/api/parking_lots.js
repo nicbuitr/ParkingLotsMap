@@ -42,38 +42,37 @@ Meteor.methods({
                 motorcycles: true,
                 bicycles: true,
                 carRates: {
-                    minute: 60,
-                    hour: 3,
-                    day: 20,
-                    month: 150
+                    minute: 60000,
+                    hour: 3000,
+                    day: 20000,
+                    month: 150000
                 },
                 motorcycleRates: {
-                    minute: 30,
-                    hour: 1,
-                    day: 10,
-                    month: 75
+                    minute: 30000,
+                    hour: 1000,
+                    day: 10000,
+                    month: 75000
                 },
                 bicycleRates: {
-                    minute: 10,
-                    hour: 500,
-                    day: 3,
-                    month: 25
+                    minute: 10000,
+                    hour: 500000,
+                    day: 3000,
+                    month: 25000
                 },
-                amenities: {
-                    fulltime: true,
-                    covered: true,
-                    ccAccepted: true,
-                    dcAccepted: true,
-                    restroom: true,
-                    handicapSpaces: true,
-                    leaveKeyReqd: false,
-                    lockers: true,
-                    helmetStorage: true,
-                    carWash: true,
-                    motoWash: false,
-                    bicycleWash: false,
-                    bicycleRepairArea: false
-                }
+                amenities: [
+                    '24/7',
+                    'Covered',
+                    'Cards Accepted',
+                    'Restroom',
+                    'Handicap Spaces',
+                    'No Vehicle Reacomodation',
+                    'Lockers',
+                    'Helmet Storage',
+                    'Car Wash',
+                    'Moto Wash',
+                    'Bicycle Wash',
+                    'Bicycle Repair Area'
+                ]
             },
             createdAt: new Date(),
             owner: Meteor.userId(),

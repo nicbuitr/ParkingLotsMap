@@ -36,6 +36,11 @@ h1 {
   margin-bottom: 10px;
   display: inline-block;
 }
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
  
 form {
   margin-top: 10px;
@@ -116,7 +121,7 @@ header .hide-completed {
 .popup-content {
   overflow-y: auto;
   text-align: center;
-  height: 350px;
+  height: 368px;
   min-width: 300px;
 }
 
@@ -230,6 +235,27 @@ header .hide-completed {
 
 .tab:target {
     display: block;
+}
+
+.amenity-row {
+  line-height:22px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float:right;
+}
+
+.clear {
+  clear:both;
+  float:none;
+}
+
+.green {
+  color: green;
 }
 
 /* Fade in tabs */

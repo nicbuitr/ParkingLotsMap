@@ -11,14 +11,15 @@
 2) Obtener GeoLocation y añadir search bar
 3) Organizar tamaño del popup
 4) Adecuar formulario para añadir nueva entrada con geoLocation
+5) Organizar info del Popup
+6) Encapsular en componentes de React
 Check.
-4.5) Organizar info del Popup
-5) Organizar banner para que permita ser ocultado
-6) Hacer Logo
-7) Revisar el cumplimiento de los criterios requeridos para el proyecto 3 y 4
-8) Implementar login con API de Facebook
-9) Agregar más parqueaderos.
-10) Responsiveness*/
+7) Organizar banner para que permita ser ocultado
+8) Hacer Logo
+9) Revisar el cumplimiento de los criterios requeridos para el proyecto 3 y 4
+10) Implementar login con API de Facebook
+11) Agregar más parqueaderos.
+12) Responsiveness*/
 
 /* global L*/
 import React, { Component, PropTypes } from 'react';
@@ -40,6 +41,7 @@ class App extends Component {
             map: null,
             layer: null,
             latlng: null,
+            filters: [],
         };
     }
   
@@ -51,25 +53,6 @@ class App extends Component {
     toggleHideCompleted() {
         this.setState({
             hideCompleted: !this.state.hideCompleted,
-        });
-    }
-
-    renderParkingLots() {
-        let filteredParkingLots = this.props.parkingLots;
-        if (this.state.hideCompleted) {
-            filteredParkingLots = filteredParkingLots.filter(parkingLot => !parkingLot.checked);
-        }
-        return filteredParkingLots.map((parkingLot) => {
-            const currentUserId = this.props.currentUser && this.props.currentUser._id;
-            const showPrivateButton = parkingLot.owner === currentUserId;
- 
-            return (
-                <ParkingLot
-                  key={parkingLot._id}
-                  parkingLot={parkingLot}
-                  showPrivateButton={showPrivateButton}
-                />
-            );
         });
     }
 
@@ -94,7 +77,6 @@ class App extends Component {
             L.control.locate({enableHighAccuracy: true}).addTo(map);
             map.on('locationfound',
           (e) => {
-              console.log('locationFound: '+e.latlng);
               this.state.latlng = e.latlng;
           });
 
@@ -121,13 +103,13 @@ class App extends Component {
 
         function updateProgressBar(processed, total, elapsed) {
             if (elapsed > 1000) {
-      // if it takes more than a second to load, display the progress bar:
+                // if it takes more than a second to load, display the progress bar:
                 progress.style.display = 'block';
                 progressBar.style.width = Math.round(processed/total*100) + '%';
             }
 
             if (processed === total) {
-      // all markers processed - hide the progress bar:
+                // all markers processed - hide the progress bar:
                 progress.style.display = 'none';
             }
         }
@@ -158,7 +140,7 @@ class App extends Component {
             onEachFeature: onEachFeature,
 
             pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, { title: feature.id });
+                return L.marker(latlng, { title: feature.properties.name });
             }
         });
 
@@ -172,33 +154,32 @@ class App extends Component {
  
     render() {
         return (
-      <div className="container">
-        <header>        
-          <AccountsUIWrapper />
-          <div className="col-md-12 text-center">
-              <h1>Parking Lots ({this.props.incompleteCount})</h1>
-              <p>Need a place to park? Find the lot that suits you most on this map!</p>
-          </div>
-          { this.props.currentUser && this.props.currentUser._id == 'yCAY4Ae2ykQqJqqxj' ?
-            <div className="col-md-12 text-center">
-                <button type="button" className="btn-primary btn-lg" onClick={this.handleSubmit.bind(this)}>Add Current Location</button>
-            </div> : ''
-          }
-          <label className="hide-completed">
-            <input
-              type="checkbox"
-              readOnly
-              checked={this.state.hideCompleted}
-              onClick={this.toggleHideCompleted.bind(this)}
-            />
-            Hide Completed ParkingLots
-          </label>
-        </header>
- 
-        <div id="progress"><div id="progress-bar"></div></div>
-        <div id='map'></div>
-        {this.state.map?this.componentDidMount():''}
-      </div>
+            <div className="container">
+              <header>        
+                <AccountsUIWrapper />
+                <div className="col-md-12 text-center">
+                    <h1>Parking Lots ({this.props.incompleteCount})</h1>
+                    <p>Need a place to park? Find the lot that suits you most on this map!</p>
+                </div>
+                { this.props.currentUser && this.props.currentUser._id == 'yCAY4Ae2ykQqJqqxj' ?
+                  <div className="col-md-12 text-center">
+                      <button type="button" className="btn-primary btn-lg" onClick={this.handleSubmit.bind(this)}>Add Current Location</button>
+                  </div> : ''
+                }            
+                {/**TODO Generar de forma dinámica los checkbox para filtrar */}  
+                <div className="row" style={{visibility: 'hidden'}}>
+                <label className="hide-completed">
+                  <input type="checkbox" readOnly checked={this.state.hideCompleted} onClick={this.toggleHideCompleted.bind(this)}
+                  />
+                  Hide Completed ParkingLots
+                </label>
+                </div>
+              </header>
+       
+              <div id="progress"><div id="progress-bar"></div></div>
+              <div id='map'></div>
+              {this.state.map?this.componentDidMount():''}
+            </div>
         );
     }
 }
