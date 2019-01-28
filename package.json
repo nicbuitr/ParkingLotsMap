@@ -1,6 +1,12 @@
 {
   "name": "parking-lots-map",
-  "private": true,
+  "description": "Map to find nearby parking lots",
+  "author": "Nicolás Buitrago Castaño (nicbuitr)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicbuitr/ParkingLotsMap.git"
+  },
   "scripts": {
     "start": "meteor run"
   },
