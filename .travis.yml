@@ -2,25 +2,7 @@ language: node_js
 node_js:
   - "node"
 install:
-  # Install meteor
-  - curl https://install.meteor.com/ | sh
-  # Add meteor to path (instead of asking for sudo in the Travis container)
-  # We can then use the faster container infrastructure - http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-  - export PATH=$HOME/.meteor:$PATH
-  - meteor npm install react --save
-  - meteor npm install react-dom --save
-  - meteor npm install mocha --save
-  - meteor npm install enzyme@^3.0.0 --save
-  - meteor npm install enzyme-adapter-react-15 --save
-  - meteor npm install babel-core --save
-  - meteor npm install --save babel-runtime
-  - meteor npm install chai --save
-  - meteor npm install chai-enzyme --save
-  - meteor add meteortesting:mocha
-
-script:
-- meteor test --once --driver-package meteortesting:mocha
-
+  true
 cache:
   directories:
     - node_modules
