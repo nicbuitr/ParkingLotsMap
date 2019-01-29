@@ -45,5 +45,5 @@ Once its deployed go to http://localhost:3000/
 
 MIT © [Nicolás Buitrago Castaño](https://github.com/nicbuitr)
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnicbuitr%ParkingLotsMap.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnicbuitr%ParkingLotsMap?ref=badge_large)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnicbuitr%2FParkingLotsMap.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnicbuitr%2FParkingLotsMap?ref=badge_large)
 
