@@ -3,6 +3,8 @@ node_js:
   - "node"
 install:
   true
+script:
+- echo "Skipping tests"
 cache:
   directories:
     - node_modules
